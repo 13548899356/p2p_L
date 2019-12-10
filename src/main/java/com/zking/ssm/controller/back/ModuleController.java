@@ -1,4 +1,4 @@
-package com.zking.ssm.controller;
+package com.zking.ssm.controller.back;
 
 import com.zking.ssm.model.Module;
 import com.zking.ssm.services.IModuleService;
