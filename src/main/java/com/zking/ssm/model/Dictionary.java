@@ -4,6 +4,9 @@ import lombok.ToString;
 
 @ToString
 public class Dictionary {
+
+//    aaaaaaaaaa
+
     private String id;
 
     private String dicttype;
