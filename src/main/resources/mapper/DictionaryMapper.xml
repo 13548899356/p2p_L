@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Dictionary" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dictType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dictItem" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dictValue" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dictIsEditable" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dictType, dictItem, dictValue, dictIsEditable
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+select * from dictionary
+ where id = #{id}
+  </select>
+  <select id="DictionaryList" resultType="com.zking.ssm.model.Dictionary"
+          parameterType="com.zking.ssm.model.Dictionary">
+    SELECT * FROM dictionary  WHERE 1=1
+    <if test="dicttype != null and ''!=dicttype" >
+      and dictType like concat('%',#{dicttype,jdbcType=VARCHAR},'%')
+    </if>
+
+  </select>
+    <select id="TypeList" resultType="com.zking.ssm.model.Dictionary"
+            parameterType="com.zking.ssm.model.Dictionary">
+  SELECT dictType FROM dictionary GROUP BY
+    dictType
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dictionary
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Dictionary" >
+    insert into dictionary (id, dictType, dictItem, 
+      dictValue, dictIsEditable)
+    values (#{id}, #{dicttype,jdbcType=VARCHAR}, #{dictitem,jdbcType=VARCHAR},
+      #{dictvalue,jdbcType=VARCHAR}, #{dictiseditable,jdbcType=INTEGER})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Dictionary" >
+    update dictionary
+    <set >
+      <if test="dicttype != null" >
+        dictType = #{dicttype,jdbcType=VARCHAR},
+      </if>
+      <if test="dictitem != null" >
+        dictItem = #{dictitem,jdbcType=VARCHAR},
+      </if>
+      <if test="dictvalue != null" >
+        dictValue = #{dictvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictiseditable != null" >
+        dictIsEditable = #{dictiseditable,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+</mapper>
