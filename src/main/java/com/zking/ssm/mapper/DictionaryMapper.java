@@ -5,6 +5,7 @@ import com.zking.ssm.model.Dictionary;
 import java.util.List;
 
 public interface DictionaryMapper {
+    //wwee
     int deleteByPrimaryKey(Dictionary dictionary);
 
     int insert(Dictionary record);
