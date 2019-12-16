@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Product" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rangeLimit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pDate" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interest" jdbcType="REAL" javaType="java.lang.Float" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, rangeLimit, pDate, remark, interest
+  </sql>
+  <insert id="addProduct" parameterType="com.zking.ssm.model.Product">
+    insert into product values(#{id},#{title},#{rangelimit},#{pdate},#{remark},#{interest})
+
+  </insert>
+  <update id="updateProduct" parameterType="com.zking.ssm.model.Product">
+    update product set title=#{title},rangeLimit=#{rangelimit},pdate=#{pdate},
+    remark=#{remark},interest=#{interest} where id=#{id}
+
+  </update>
+  <delete id="delProduct" parameterType="com.zking.ssm.model.Product">
+    delete from product where id=#{id}
+  </delete>
+  <select id="getListProduct" resultType="com.zking.ssm.model.Product"
+          parameterType="com.zking.ssm.model.Product">
+    select * from product where 1=1
+    <if test="null!=title and ''!=title">
+      and title like concat(concat('%',#{title}),'%')
+    </if>
+
+
+  </select>
+
+</mapper>
