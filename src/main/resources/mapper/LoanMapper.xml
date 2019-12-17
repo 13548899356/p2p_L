@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.LoanMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Loan" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TYPE" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, pid, state, TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from loan
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="ListLoan" resultType="com.zking.ssm.model.Loan" parameterType="com.zking.ssm.model.Loan">
+    select * from loan
+    where 1=1
+
+    <if test="state != null">
+      and state=#{state}
+    </if>
+
+    <if test="id != null and ''!=id">
+      and id = #{id}
+    </if>
+
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from loan
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Loan" >
+    insert into loan (id, uid, pid, 
+      state, TYPE)
+    values (#{id,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{type,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Loan" >
+    update loan
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>
