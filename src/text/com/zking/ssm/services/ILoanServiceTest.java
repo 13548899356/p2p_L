@@ -78,6 +78,8 @@ public class ILoanServiceTest extends BaseTestCase{
         pageBean.getTotal();
         System.out.println(pageBean.getTotal());
         for (Loan loan1:loans) {
+
+
             user.setUid(loan1.getUid());
             product.setId(loan1.getPid());
             loan1.setSysUser(sysUserService.getListUser(user,pageBean).get(0));
