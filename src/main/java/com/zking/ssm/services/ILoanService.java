@@ -17,5 +17,11 @@ public interface ILoanService {
 
     List<Loan> ListLoan(Loan loan, PageBean pageBean);
 
+    //审核失败
+    int Update(Loan loan);
+
+    //审核成功
+    int Updatecg(Loan loan);
+
 
 }
