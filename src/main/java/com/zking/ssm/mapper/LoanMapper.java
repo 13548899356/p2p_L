@@ -15,5 +15,11 @@ public interface LoanMapper {
 
     List<Loan> ListLoan(Loan loan);
 
+    //审核失败
+    int Update(Loan loan);
+
+    //审核成功
+    int Updatecg(Loan loan);
+
 
 }
