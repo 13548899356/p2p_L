@@ -49,6 +49,7 @@ public class LoanController {
         dictionary =new Dictionary();
     }
 
+    //查询全部
     @RequestMapping("/List")
     @ResponseBody
     public Object List(Loan loan,PageBean pageBean){
@@ -63,12 +64,30 @@ public class LoanController {
         return jsonData.toJsonPager("",true,loans.size(),loans);
     }
 
+    //类型查询
     @RequestMapping("/TypeList")
     @ResponseBody
     public Object TypeList(Dictionary dictionary){
         List<Dictionary> dictionaries = dictionaryService.hdList(dictionary);
         return  jsonData.toJsonObject(true,dictionaries);
     }
+
+    //审核失败
+    @RequestMapping("/Update")
+    @ResponseBody
+    public Object Update(Loan loan){
+        int update = loanService.Update(loan);
+        return jsonData.toJsonObject(true,update);
+    }
+
+    //审核成功
+    @RequestMapping("/updatecg")
+    @ResponseBody
+    public Object updatecg(Loan loan){
+        int update = loanService.Updatecg(loan);
+        return jsonData.toJsonObject(true,update);
+    }
+
 
 }
 
