@@ -18,4 +18,6 @@ public interface DictionaryMapper {
 
     List<Object> TypeList();
 
+    List<Dictionary> hdList(Dictionary dictionary);
+
 }

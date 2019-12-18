@@ -16,4 +16,6 @@ int delProduct(Product product);
 
 int updateProduct(Product product);
 
+Product getProduct(Product product);
+
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.zking.ssm.util.jsonData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,32 +37,23 @@ public class LoanController {
     private IDictionaryService dictionaryService;
 
 
-    private Loan loan;
-    private Product product;
-    private sysUser sysUser;
-    private Dictionary dictionary;
-
-    @ModelAttribute
-    public void init(){
-        System.out.println("init");
-        loan=new Loan();
-        product=new Product();
-        sysUser=new sysUser();
-        dictionary =new Dictionary();
-    }
 
     @RequestMapping("/List")
     @ResponseBody
     public Object List(Loan loan,PageBean pageBean){
         List<Loan> loans = loanService.ListLoan(loan,pageBean);
+        List<Loan> list=new ArrayList<>();
         System.out.println(pageBean.getTotal());
-        for (Loan loan1:loans) {
-            sysUser.setUid(loan1.getUid());
+        sysUser user=new sysUser();
+        Product product=new Product();
+        for (Loan loan1:loans){
+            user.setUid(loan1.getUid());
+            loan1.setSysUser(sysUserService.getListUser(user,null).get(0));
             product.setId(loan1.getPid());
-            loan1.setSysUser(sysUserService.getListUser(sysUser,pageBean).get(0));
-            loan1.setProduct(productService.getListProduct(product,pageBean).get(0));
+            loan1.setProduct(productService.getProduct(product));
+            list.add(loan1);
         }
-        return jsonData.toJsonPager("",true,loans.size(),loans);
+        return jsonData.toJsonPager("",true,loans.size(),list);
     }
 
     @RequestMapping("/TypeList")
@@ -97,7 +89,6 @@ public class LoanController {
             return jsonData.toJsonMessage("",false);
         }
     }
-
     //审核失败
     @RequestMapping("/Update")
     @ResponseBody
@@ -113,5 +104,6 @@ public class LoanController {
         int update = loanService.Updatecg(loan);
         return jsonData.toJsonObject(true,update);
     }
+
 }
 

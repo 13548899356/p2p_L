@@ -1,6 +1,7 @@
 package com.zking.ssm.services;
 
 import com.zking.ssm.model.sysUser;
+import com.zking.ssm.util.PageBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -14,6 +15,6 @@ public interface ISysUserService {
 
     sysUser getUser(sysUser user);
 
-    List<sysUser> getListUser(sysUser user);
+    List<sysUser> getListUser(sysUser user, PageBean pageBean);
 
 }

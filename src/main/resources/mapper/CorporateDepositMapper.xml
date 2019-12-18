@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.CorporateDepositMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.CorporateDeposit" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="getMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="pid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="capital" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, getMoney, pid, capital
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from corporatedeposit
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="ListDeposit" resultType="com.zking.ssm.model.CorporateDeposit"
+          parameterType="com.zking.ssm.model.CorporateDeposit">
+    select * from corporatedeposit
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from corporatedeposit
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.CorporateDeposit" >
+    insert into corporatedeposit (id, getMoney, pid, 
+      capital)
+    values (#{id,jdbcType=VARCHAR}, #{getmoney,jdbcType=DECIMAL}, #{pid,jdbcType=VARCHAR}, 
+      #{capital,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.CorporateDeposit" >
+    update corporatedeposit
+    <set >
+      <if test="getmoney != null" >
+        getMoney = #{getmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="capital != null" >
+        capital = #{capital,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="Update" parameterType="com.zking.ssm.model.CorporateDeposit">
+    UPDATE corporatedeposit SET capital=capital-${rangelimit}
+    WHERE pid=#{pid,jdbcType=VARCHAR}
+  </update>
+</mapper>

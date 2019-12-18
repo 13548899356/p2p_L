@@ -35,4 +35,9 @@ public class ProductServiceImpl implements IProductService {
     public int updateProduct(Product product) {
         return productMapper.updateProduct(product);
     }
+
+    @Override
+    public Product getProduct(Product product) {
+        return productMapper.getProduct(product);
+    }
 }

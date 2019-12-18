@@ -20,11 +20,11 @@ public class PageBean implements Serializable {
 	private String url;
 	//获取所有的请求参数
 	private Map<String,String[]> map;
-	
+
 	public PageBean() {
 		super();
 	}
-	
+
 	//设置请求参数
 	public void setRequest(HttpServletRequest req) {
 		String page=req.getParameter("page");
@@ -59,7 +59,7 @@ public class PageBean implements Serializable {
 	public void setPage(int page) {
 		this.page = page;
 	}
-	
+
 	public void setPage(String page) {
 		if(null!=page&&!"".equals(page.trim()))
 			this.page = Integer.parseInt(page);
@@ -72,7 +72,7 @@ public class PageBean implements Serializable {
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
-	
+
 	public void setRows(String rows) {
 		if(null!=rows&&!"".equals(rows.trim()))
 			this.rows = Integer.parseInt(rows);
@@ -85,7 +85,7 @@ public class PageBean implements Serializable {
 	public void setTotal(int total) {
 		this.total = total;
 	}
-	
+
 	public void setTotal(String total) {
 		this.total = Integer.parseInt(total);
 	}
@@ -93,16 +93,16 @@ public class PageBean implements Serializable {
 	public boolean isPagination() {
 		return isPagination;
 	}
-	
+
 	public void setPagination(boolean isPagination) {
 		this.isPagination = isPagination;
 	}
-	
+
 	public void setPagination(String isPagination) {
 		if(null!=isPagination&&!"".equals(isPagination.trim()))
 			this.isPagination = Boolean.parseBoolean(isPagination);
 	}
-	
+
 	/**
 	 * 获取分页起始标记位置
 	 * @return
@@ -111,7 +111,7 @@ public class PageBean implements Serializable {
 		//(当前页码-1)*显示记录数
 		return (this.getPage()-1)*this.rows;
 	}
-	
+
 	/**
 	 * 末页
 	 * @return
@@ -122,7 +122,7 @@ public class PageBean implements Serializable {
 			totalpage++;
 		return totalpage;
 	}
-	
+
 	/**
 	 * 下一页
 	 * @return
@@ -133,7 +133,7 @@ public class PageBean implements Serializable {
 			nextPage=this.getMaxPage();
 		return nextPage;
 	}
-	
+
 	/**
 	 * 上一页
 	 * @return

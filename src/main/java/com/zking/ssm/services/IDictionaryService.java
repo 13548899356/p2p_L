@@ -21,5 +21,5 @@ public interface IDictionaryService {
     //类型查询
     List<Object> TypeList();
 
-
+    List<Dictionary> hdList(Dictionary dictionary);
 }

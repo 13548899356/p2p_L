@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -73,18 +74,17 @@ public class ILoanServiceTest extends BaseTestCase{
 
     @Test
     public void listLoan() {
-        loan.setId("2");
         List<Loan> loans = loanService.ListLoan(loan,pageBean);
-        pageBean.getTotal();
         System.out.println(pageBean.getTotal());
-        for (Loan loan1:loans) {
-
-
-            user.setUid(loan1.getUid());
+        List<Loan> list=new ArrayList<>();
+        for (Loan loan1:loans){
             product.setId(loan1.getPid());
-            loan1.setSysUser(sysUserService.getListUser(user,pageBean).get(0));
-            loan1.setProduct(productService.getListProduct(product,pageBean).get(0));
-            System.out.println(loan1);
+            loan1.setProduct(productService.getProduct(product));
+            user.setUid(loan1.getUid());
+            loan1.setSysUser(sysUserService.getListUser(user,null).get(0));
+
+            list.add(loan1);
         }
+        System.out.println(list);
     }
 }

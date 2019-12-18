@@ -9,12 +9,12 @@ import java.util.List;
 
 public interface IProductService {
 
-List<Product> getListProduct(Product product, PageBean pageBean);
-
+    List<Product> getListProduct(Product product, PageBean pageBean);
 
     int addProduct(Product product);
 
     int delProduct(Product product);
 
     int updateProduct(Product product);
+    Product getProduct(Product product);
 }

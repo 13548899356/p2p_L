@@ -14,7 +14,6 @@ public interface LoanMapper {
     int updateByPrimaryKeySelective(Loan record);
 
     List<Loan> ListLoan(Loan loan);
-
     //审核失败
     int Update(Loan loan);
 

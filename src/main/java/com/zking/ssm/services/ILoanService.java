@@ -23,5 +23,4 @@ public interface ILoanService {
     //审核成功
     int Updatecg(Loan loan);
 
-
 }

@@ -30,7 +30,9 @@
     <if test="id != null and ''!=id">
       and id = #{id}
     </if>
-
+    <if test="uid != null and ''!=uid">
+      and uid = #{uid}
+    </if>
 
   </select>
 

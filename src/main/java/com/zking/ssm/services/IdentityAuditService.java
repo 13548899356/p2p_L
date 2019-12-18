@@ -1,6 +1,9 @@
 package com.zking.ssm.services;
 
 import com.zking.ssm.model.IdentityAudit;
+import com.zking.ssm.util.PageBean;
+
+import java.util.List;
 
 
 public interface IdentityAuditService {
@@ -15,4 +18,6 @@ public interface IdentityAuditService {
     int updateByPrimaryKeySelective(IdentityAudit record);
 
     int updateByPrimaryKey(IdentityAudit record);
+
+    List<IdentityAudit> listIdentity(IdentityAudit audit, PageBean pageBean);
 }

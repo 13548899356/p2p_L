@@ -47,4 +47,9 @@ public class DictionaryServiceImpl implements IDictionaryService {
     public List<Object> TypeList() {
         return((List)dictionaryMapper.TypeList());
     }
+
+    @Override
+    public List<Dictionary> hdList(Dictionary dictionary) {
+        return dictionaryMapper.hdList(dictionary);
+    }
 }

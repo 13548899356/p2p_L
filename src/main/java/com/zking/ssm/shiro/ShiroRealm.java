@@ -1,6 +1,8 @@
 package com.zking.ssm.shiro;
 
 
+import com.zking.ssm.model.sysUser;
+import com.zking.ssm.services.ISysUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -11,48 +13,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
 //extends AuthorizingRealm
-public class ShiroRealm {
+public class ShiroRealm extends AuthorizingRealm {
 
-  /*  @Autowired
-    private sysUserService sysUserService;
+    @Autowired
+    private ISysUserService sysUserService;
 
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取token中的
-        String username = principalCollection.getPrimaryPrincipal().toString();
-        System.out.println(username);
-        //根据username获取对应的角色及权限
-        Set<String> permissions = sysUserService.findPermissions(username);
-        Set<String> roles = sysUserService.findRoles(username);
-        System.out.println(permissions+","+roles);
 
-//        将用户和权限信息设置到SimpleAuthorizationInfo
-        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-        info.setRoles(roles);
-        info.setStringPermissions(permissions);
-        System.out.println(roles);
-        return info;
+        System.out.println("获取token中的");
+        return null;
     }
 
     //认证
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        System.out.println("认证");
+
         String username = token.getPrincipal().toString();
         String password = token.getCredentials().toString();
+        sysUser user=new sysUser();
+        user.setUname(username);
+        user.setPassword(password);
 //        根据用户名获取对应的用户信息
-        sysUser user = sysUserService.userLogin(username);
-        if (null == user) {
+        sysUser users = sysUserService.getUser(user);
+        if (null == users) {
             throw new UnknownAccountException();
         }
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(
-                user.getUsername(),
-                user.getPassword(),
+                users.getUname(),
+                users.getPassword(),
 //                盐
-                ByteSource.Util.bytes(user.getSalt()),
+                ByteSource.Util.bytes(users.getSalt()),
                 this.getName()
         );
 
         return info;
-    }*/
+    }
 }

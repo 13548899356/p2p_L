@@ -2,6 +2,8 @@ package com.zking.ssm.model;
 
 import lombok.ToString;
 
+import java.util.List;
+
 @ToString
 public class IdentityAudit {
     private String id;
@@ -22,6 +24,16 @@ public class IdentityAudit {
 
     private Integer state;
 
+    private List<sysUser> sysUsers;
+
+    public List<sysUser> getSysUsers() {
+        return sysUsers;
+    }
+
+    public void setSysUsers(List<sysUser> sysUsers) {
+        this.sysUsers = sysUsers;
+    }
+
     public IdentityAudit(String id, String uid, String uname, String usex, String identity, String image1, String image2, String message, Integer state) {
         this.id = id;
         this.uid = uid;
@@ -37,6 +49,8 @@ public class IdentityAudit {
     public IdentityAudit() {
         super();
     }
+
+
 
     public String getId() {
         return id;
