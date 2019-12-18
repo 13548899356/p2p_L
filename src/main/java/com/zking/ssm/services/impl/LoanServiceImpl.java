@@ -39,4 +39,14 @@ public class LoanServiceImpl implements ILoanService {
     public List<Loan> ListLoan(Loan loan, PageBean pageBean) {
         return loanMapper.ListLoan(loan);
     }
+
+    @Override
+    public int Update(Loan loan) {
+        return loanMapper.Update(loan);
+    }
+
+    @Override
+    public int Updatecg(Loan loan) {
+        return loanMapper.Updatecg(loan);
+    }
 }
