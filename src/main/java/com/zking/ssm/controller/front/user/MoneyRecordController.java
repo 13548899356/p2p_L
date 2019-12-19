@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
     @RequestMapping("/getMoneyRecord")
     @ResponseBody
     public Object getMoneyRecord(MoneyRecord moneyRecord){
+        System.out.println("==============================================");
+        System.out.println(moneyRecord.getUid());
         MoneyRecord moneyRecord1 = recordService.selectByPrimaryKey(moneyRecord.getUid());
         return jsonData.toJsonObject(true,moneyRecord1);
     }
