@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.BorrowmoneyMapper">
+    <resultMap id="BaseResultMap" type="com.zking.ssm.model.Borrowmoney">
+        <constructor>
+            <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="returnType" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="bidRequestType" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="bidRequestState" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="bidRequestAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="currentRate" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="minBidAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="monthes2Return" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="bidCount" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="totalRewardAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="currentSum" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="Title" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="Description" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="Note" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="disableDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="disableDays" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="applyTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="publishTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, uid, returnType, bidRequestType, bidRequestState, bidRequestAmount, currentRate, 
+    minBidAmount, monthes2Return, bidCount, totalRewardAmount, currentSum, Title, Description, 
+    Note, disableDate, disableDays, applyTime, publishTime
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from borrowmoney
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="getListBorrowMoney" resultType="com.zking.ssm.model.Borrowmoney"
+            parameterType="com.zking.ssm.model.Borrowmoney">
+        select * from borrowmoney where 1=1
+
+    </select>
+    <select id="BorrowmoneyList" resultType="com.zking.ssm.model.Borrowmoney"
+            parameterType="com.zking.ssm.model.Borrowmoney">
+        select * from borrowmoney
+        where 1=1
+        <if test="uid != null and ''!=uid">
+            and uid = #{uid}
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from borrowmoney
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.zking.ssm.model.Borrowmoney">
+    insert into borrowmoney (id, uid, returnType, 
+      bidRequestType, bidRequestState, bidRequestAmount, 
+      currentRate, minBidAmount, monthes2Return, 
+      bidCount, totalRewardAmount, currentSum, 
+      Title, Description, Note, 
+      disableDate, disableDays, applyTime, 
+      publishTime)
+    values (#{id,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{returntype,jdbcType=VARCHAR}, 
+      #{bidrequesttype,jdbcType=INTEGER}, #{bidrequeststate,jdbcType=INTEGER}, #{bidrequestamount,jdbcType=DECIMAL}, 
+      #{currentrate,jdbcType=DECIMAL}, #{minbidamount,jdbcType=DECIMAL}, #{monthes2return,jdbcType=TIMESTAMP}, 
+      #{bidcount,jdbcType=INTEGER}, #{totalrewardamount,jdbcType=DECIMAL}, #{currentsum,jdbcType=DECIMAL}, 
+      #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{disabledate,jdbcType=TIMESTAMP}, #{disabledays,jdbcType=INTEGER}, #{applytime,jdbcType=TIMESTAMP}, 
+      #{publishtime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zking.ssm.model.Borrowmoney">
+        insert into borrowmoney
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="returntype != null">
+                returnType,
+            </if>
+            <if test="bidrequesttype != null">
+                bidRequestType,
+            </if>
+            <if test="bidrequeststate != null">
+                bidRequestState,
+            </if>
+            <if test="bidrequestamount != null">
+                bidRequestAmount,
+            </if>
+            <if test="currentrate != null">
+                currentRate,
+            </if>
+            <if test="minbidamount != null">
+                minBidAmount,
+            </if>
+            <if test="monthes2return != null">
+                monthes2Return,
+            </if>
+            <if test="bidcount != null">
+                bidCount,
+            </if>
+            <if test="totalrewardamount != null">
+                totalRewardAmount,
+            </if>
+            <if test="currentsum != null">
+                currentSum,
+            </if>
+            <if test="title != null">
+                Title,
+            </if>
+            <if test="description != null">
+                Description,
+            </if>
+            <if test="note != null">
+                Note,
+            </if>
+            <if test="disabledate != null">
+                disableDate,
+            </if>
+            <if test="disabledays != null">
+                disableDays,
+            </if>
+            <if test="applytime != null">
+                applyTime,
+            </if>
+            <if test="publishtime != null">
+                publishTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="returntype != null">
+                #{returntype,jdbcType=VARCHAR},
+            </if>
+            <if test="bidrequesttype != null">
+                #{bidrequesttype,jdbcType=INTEGER},
+            </if>
+            <if test="bidrequeststate != null">
+                #{bidrequeststate,jdbcType=INTEGER},
+            </if>
+            <if test="bidrequestamount != null">
+                #{bidrequestamount,jdbcType=DECIMAL},
+            </if>
+            <if test="currentrate != null">
+                #{currentrate,jdbcType=DECIMAL},
+            </if>
+            <if test="minbidamount != null">
+                #{minbidamount,jdbcType=DECIMAL},
+            </if>
+            <if test="monthes2return != null">
+                #{monthes2return,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bidcount != null">
+                #{bidcount,jdbcType=INTEGER},
+            </if>
+            <if test="totalrewardamount != null">
+                #{totalrewardamount,jdbcType=DECIMAL},
+            </if>
+            <if test="currentsum != null">
+                #{currentsum,jdbcType=DECIMAL},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="disabledate != null">
+                #{disabledate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="disabledays != null">
+                #{disabledays,jdbcType=INTEGER},
+            </if>
+            <if test="applytime != null">
+                #{applytime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="publishtime != null">
+                #{publishtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Borrowmoney">
+        update borrowmoney
+        <set>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="returntype != null">
+                returnType = #{returntype,jdbcType=VARCHAR},
+            </if>
+            <if test="bidrequesttype != null">
+                bidRequestType = #{bidrequesttype,jdbcType=INTEGER},
+            </if>
+            <if test="bidrequeststate != null">
+                bidRequestState = #{bidrequeststate,jdbcType=INTEGER},
+            </if>
+            <if test="bidrequestamount != null">
+                bidRequestAmount = #{bidrequestamount,jdbcType=DECIMAL},
+            </if>
+            <if test="currentrate != null">
+                currentRate = #{currentrate,jdbcType=DECIMAL},
+            </if>
+            <if test="minbidamount != null">
+                minBidAmount = #{minbidamount,jdbcType=DECIMAL},
+            </if>
+            <if test="monthes2return != null">
+                monthes2Return = #{monthes2return,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bidcount != null">
+                bidCount = #{bidcount,jdbcType=INTEGER},
+            </if>
+            <if test="totalrewardamount != null">
+                totalRewardAmount = #{totalrewardamount,jdbcType=DECIMAL},
+            </if>
+            <if test="currentsum != null">
+                currentSum = #{currentsum,jdbcType=DECIMAL},
+            </if>
+            <if test="title != null">
+                Title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                Description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null">
+                Note = #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="disabledate != null">
+                disableDate = #{disabledate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="disabledays != null">
+                disableDays = #{disabledays,jdbcType=INTEGER},
+            </if>
+            <if test="applytime != null">
+                applyTime = #{applytime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="publishtime != null">
+                publishTime = #{publishtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Borrowmoney">
+    update borrowmoney
+    set uid = #{uid,jdbcType=VARCHAR},
+      returnType = #{returntype,jdbcType=VARCHAR},
+      bidRequestType = #{bidrequesttype,jdbcType=INTEGER},
+      bidRequestState = #{bidrequeststate,jdbcType=INTEGER},
+      bidRequestAmount = #{bidrequestamount,jdbcType=DECIMAL},
+      currentRate = #{currentrate,jdbcType=DECIMAL},
+      minBidAmount = #{minbidamount,jdbcType=DECIMAL},
+      monthes2Return = #{monthes2return,jdbcType=TIMESTAMP},
+      bidCount = #{bidcount,jdbcType=INTEGER},
+      totalRewardAmount = #{totalrewardamount,jdbcType=DECIMAL},
+      currentSum = #{currentsum,jdbcType=DECIMAL},
+      Title = #{title,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      disableDate = #{disabledate,jdbcType=TIMESTAMP},
+      disableDays = #{disabledays,jdbcType=INTEGER},
+      applyTime = #{applytime,jdbcType=TIMESTAMP},
+      publishTime = #{publishtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

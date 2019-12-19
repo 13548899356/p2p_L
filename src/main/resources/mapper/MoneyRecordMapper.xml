@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.MoneyRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.MoneyRecord" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mrDate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="mrType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mrMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="usableAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="freezedAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="installment" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="repayment" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="repayDate" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="mrRemark" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, mrDate, mrType, mrMoney, usableAmount, freezedAmount, installment, repayment, 
+    repayDate, state, mrRemark
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from moneyrecord
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByPrimaryKey" resultType="com.zking.ssm.model.MoneyRecord">
+    select * from moneyrecord where uid=#{uid}
+  </select>
+    <select id="BorrowmoneyList" resultType="com.zking.ssm.model.Borrowmoney"
+            parameterType="com.zking.ssm.model.Borrowmoney">
+      select * from borrowmoney
+      where 1=1
+      <if test="uid != null and ''!=uid">
+        and uid = #{uid}
+      </if>
+    </select>
+    <insert id="insert" parameterType="com.zking.ssm.model.MoneyRecord" >
+    insert into moneyrecord (id, uid, mrDate, 
+      mrType, mrMoney, usableAmount, 
+      freezedAmount, installment, repayment, 
+      repayDate, state, mrRemark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{mrdate,jdbcType=TIMESTAMP}, 
+      #{mrtype,jdbcType=VARCHAR}, #{mrmoney,jdbcType=DECIMAL}, #{usableamount,jdbcType=DECIMAL}, 
+      #{freezedamount,jdbcType=DECIMAL}, #{installment,jdbcType=INTEGER}, #{repayment,jdbcType=INTEGER}, 
+      #{repaydate,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{mrremark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.MoneyRecord" >
+    insert into moneyrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="mrdate != null" >
+        mrDate,
+      </if>
+      <if test="mrtype != null" >
+        mrType,
+      </if>
+      <if test="mrmoney != null" >
+        mrMoney,
+      </if>
+      <if test="usableamount != null" >
+        usableAmount,
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount,
+      </if>
+      <if test="installment != null" >
+        installment,
+      </if>
+      <if test="repayment != null" >
+        repayment,
+      </if>
+      <if test="repaydate != null" >
+        repayDate,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="mrremark != null" >
+        mrRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="mrdate != null" >
+        #{mrdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mrtype != null" >
+        #{mrtype,jdbcType=VARCHAR},
+      </if>
+      <if test="mrmoney != null" >
+        #{mrmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="usableamount != null" >
+        #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="installment != null" >
+        #{installment,jdbcType=INTEGER},
+      </if>
+      <if test="repayment != null" >
+        #{repayment,jdbcType=INTEGER},
+      </if>
+      <if test="repaydate != null" >
+        #{repaydate,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="mrremark != null" >
+        #{mrremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.MoneyRecord" >
+    update moneyrecord
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="mrdate != null" >
+        mrDate = #{mrdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mrtype != null" >
+        mrType = #{mrtype,jdbcType=VARCHAR},
+      </if>
+      <if test="mrmoney != null" >
+        mrMoney = #{mrmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="usableamount != null" >
+        usableAmount = #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="installment != null" >
+        installment = #{installment,jdbcType=INTEGER},
+      </if>
+      <if test="repayment != null" >
+        repayment = #{repayment,jdbcType=INTEGER},
+      </if>
+      <if test="repaydate != null" >
+        repayDate = #{repaydate,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="mrremark != null" >
+        mrRemark = #{mrremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.MoneyRecord" >
+    update moneyrecord
+    set uid = #{uid,jdbcType=VARCHAR},
+      mrDate = #{mrdate,jdbcType=TIMESTAMP},
+      mrType = #{mrtype,jdbcType=VARCHAR},
+      mrMoney = #{mrmoney,jdbcType=DECIMAL},
+      usableAmount = #{usableamount,jdbcType=DECIMAL},
+      freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      installment = #{installment,jdbcType=INTEGER},
+      repayment = #{repayment,jdbcType=INTEGER},
+      repayDate = #{repaydate,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      mrRemark = #{mrremark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

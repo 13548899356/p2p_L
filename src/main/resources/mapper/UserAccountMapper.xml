@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.UserAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.UserAccount" >
+    <constructor >
+      <idArg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="photo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="tradePassword" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="usableAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="freezedAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="unReceiveInterest" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="unReceivePrincipal" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="unReturnAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="remainBorrowLimit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="borrowLimit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, photo, tradePassword, usableAmount, freezedAmount, unReceiveInterest, unReceivePrincipal, 
+    unReturnAmount, remainBorrowLimit, borrowLimit, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from useraccount
+    where uid = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from useraccount
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.UserAccount" >
+    insert into useraccount (id, uid, photo, 
+      tradePassword, usableAmount, freezedAmount, 
+      unReceiveInterest, unReceivePrincipal, 
+      unReturnAmount, remainBorrowLimit, borrowLimit, 
+      remark)
+    values (#{id,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{tradepassword,jdbcType=VARCHAR}, #{usableamount,jdbcType=DECIMAL}, #{freezedamount,jdbcType=DECIMAL}, 
+      #{unreceiveinterest,jdbcType=DECIMAL}, #{unreceiveprincipal,jdbcType=DECIMAL}, 
+      #{unreturnamount,jdbcType=DECIMAL}, #{remainborrowlimit,jdbcType=DECIMAL}, #{borrowlimit,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.UserAccount" >
+    insert into useraccount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="tradepassword != null" >
+        tradePassword,
+      </if>
+      <if test="usableamount != null" >
+        usableAmount,
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount,
+      </if>
+      <if test="unreceiveinterest != null" >
+        unReceiveInterest,
+      </if>
+      <if test="unreceiveprincipal != null" >
+        unReceivePrincipal,
+      </if>
+      <if test="unreturnamount != null" >
+        unReturnAmount,
+      </if>
+      <if test="remainborrowlimit != null" >
+        remainBorrowLimit,
+      </if>
+      <if test="borrowlimit != null" >
+        borrowLimit,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradepassword != null" >
+        #{tradepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usableamount != null" >
+        #{usableamount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezedamount != null" >
+        #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="unreceiveinterest != null" >
+        #{unreceiveinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="unreceiveprincipal != null" >
+        #{unreceiveprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="unreturnamount != null" >
+        #{unreturnamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainborrowlimit != null" >
+        #{remainborrowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowlimit != null" >
+        #{borrowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.UserAccount" >
+    update useraccount
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradepassword != null" >
+        tradePassword = #{tradepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usableamount != null" >
+        usableAmount =usableAmount+${usableamount},
+      </if>
+      <if test="freezedamount != null" >
+        freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      </if>
+      <if test="unreceiveinterest != null" >
+        unReceiveInterest = #{unreceiveinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="unreceiveprincipal != null" >
+        unReceivePrincipal = #{unreceiveprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="unreturnamount != null" >
+        unReturnAmount = #{unreturnamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainborrowlimit != null" >
+        remainBorrowLimit = #{remainborrowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowlimit != null" >
+        borrowLimit = #{borrowlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.UserAccount" >
+    update useraccount
+    set uid = #{uid,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      tradePassword = #{tradepassword,jdbcType=VARCHAR},
+      usableAmount = #{usableamount,jdbcType=DECIMAL},
+      freezedAmount = #{freezedamount,jdbcType=DECIMAL},
+      unReceiveInterest = #{unreceiveinterest,jdbcType=DECIMAL},
+      unReceivePrincipal = #{unreceiveprincipal,jdbcType=DECIMAL},
+      unReturnAmount = #{unreturnamount,jdbcType=DECIMAL},
+      remainBorrowLimit = #{remainborrowlimit,jdbcType=DECIMAL},
+      borrowLimit = #{borrowlimit,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+</mapper>

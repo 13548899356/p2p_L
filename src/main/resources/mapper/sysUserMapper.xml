@@ -21,7 +21,7 @@
   </insert>
   <update id="updateUser" parameterType="com.zking.ssm.model.sysUser"></update>
   <select id="getUser" resultType="com.zking.ssm.model.sysUser" parameterType="com.zking.ssm.model.sysUser">
-    select * from sys_user where uname=#{uname} and password=#{password}
+    select * from sys_user where uname=#{uname}
 
   </select>
   <select id="getListUser" resultType="com.zking.ssm.model.sysUser"

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.userIdentityMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.userIdentity" >
+    <constructor >
+      <arg column="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Identity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Pay" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.zking.ssm.model.userIdentity" >
+    insert into useridentity (id, uid, Phone, 
+      Email, Identity, Pay
+      )
+    values (#{id,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, #{pay,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateIdentity">
+UPDATE userIdentity SET phone=null WHERE phone=#{phone}
+  </update>
+  <update id="updateIdentitySelectKey" parameterType="com.zking.ssm.model.userIdentity">
+    update useridentity
+    <set >
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="pay != null" >
+        pay = ${pay},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+
+
+
+  </update>
+
+
+  <select id="getIdentity" resultType="com.zking.ssm.model.userIdentity"
+          parameterType="com.zking.ssm.model.userIdentity">
+    select * from userIdentity where phone=#{phone}
+    <if test="null!=email and ''!=email">
+      or email=#{email}
+    </if>
+    <if test="null!=identity and ''!=identity">
+      or identity=#{identity}
+    </if>
+    <if test="null!=uid and ''!=uid">
+      or uid=#{uid}
+    </if>
+  </select>
+
+
+
+  <select id="getListIdentity" resultType="com.zking.ssm.model.userIdentity"
+          parameterType="com.zking.ssm.model.userIdentity"></select>
+
+</mapper>
