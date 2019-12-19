@@ -1,6 +1,7 @@
 package com.zking.ssm.services;
 
 import com.zking.ssm.model.Borrowmoney;
+import com.zking.ssm.util.PageBean;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface IBorrowmoneyService {
     int updateByPrimaryKey(Borrowmoney record);
 
     List<Borrowmoney> getListBorrowMoney(Borrowmoney borrowmoney);
+
+    //查询
+    List<Borrowmoney> BorrowmoneyList(Borrowmoney borrowmoney, PageBean pageBean);
 }

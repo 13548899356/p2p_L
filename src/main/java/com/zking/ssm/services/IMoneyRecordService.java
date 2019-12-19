@@ -11,7 +11,7 @@ public interface IMoneyRecordService {
 
     int insertSelective(MoneyRecord record);
 
-    MoneyRecord selectByPrimaryKey(String id);
+    MoneyRecord selectByPrimaryKey(String uid);
 
     int updateByPrimaryKeySelective(MoneyRecord record);
 

@@ -28,8 +28,8 @@ public class MoneyRecordServiceImpl implements IMoneyRecordService {
     }
 
     @Override
-    public MoneyRecord selectByPrimaryKey(String id) {
-        return recordMapper.selectByPrimaryKey(id);
+    public MoneyRecord selectByPrimaryKey(String uid) {
+        return recordMapper.selectByPrimaryKey(uid);
     }
 
     @Override
