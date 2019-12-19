@@ -18,4 +18,7 @@ public interface BorrowmoneyMapper {
     int updateByPrimaryKey(Borrowmoney record);
 
     List<Borrowmoney> getListBorrowMoney(Borrowmoney borrowmoney);
+
+    //查询
+    List<Borrowmoney> BorrowmoneyList(Borrowmoney borrowmoney);
 }
