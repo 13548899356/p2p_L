@@ -45,4 +45,17 @@ public class systemMessageController {
 
     }
 
+    //删除系统信息
+    @RequestMapping("/delSystemMessage")
+    @ResponseBody
+    public Object delMessage(String id){
+        int i = messageService.deleteByPrimaryKey(id);
+        if(i>0){
+            return jsonData.toJsonMessage("ok",true);
+        }else{
+            return jsonData.toJsonMessage("no",false);
+        }
+    }
+
+
 }
