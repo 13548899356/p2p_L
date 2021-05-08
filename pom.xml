@@ -57,7 +57,7 @@
     <!--jsr303-->
     <jsr303.version>6.0.7.Final</jsr303.version>
     <!--shiro-->
-    <shiro.version>1.2.5</shiro.version>
+    <shiro.version>1.6.0</shiro.version>
     <!--pinyin4j-->
     <pinyin4j.version>2.5.1</pinyin4j.version>
 
